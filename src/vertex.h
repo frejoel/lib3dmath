@@ -1,5 +1,5 @@
-#ifndef VECTORS_H_
-#define VECTORS_H_
+#ifndef VERTEX_H_
+#define VERTEX_H_
 
 #include <math.h>
 #include <vector>
@@ -369,4 +369,4 @@ typedef Vec4<double> Vec4d;
 
 } // namespace math
 
-#endif // VECTORS_H_
+#endif // VERTEX_H_

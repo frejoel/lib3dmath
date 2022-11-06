@@ -1,7 +1,7 @@
 #ifndef MAT4_H_
 #define MAT4_H_
 
-#include "vectors.h"
+#include "vertex.h"
 #include "Mat3.h"
 
 namespace math {
@@ -105,24 +105,21 @@ public:
 
   Mat4<T>(const Vec4<T>& _quat) {
     setIdentity();
-    float qxx = _quat.x * _quat.x;
-    float qyy = _quat.y * _quat.y;
-    float qzz = _quat.z * _quat.z;
-    float qxz = _quat.x * _quat.z;
-    float qxy = _quat.x * _quat.y;
-    float qyz = _quat.y * _quat.z;
-    float qwx = _quat.w * _quat.x;
-    float qwy = _quat.w * _quat.y;
-    float qwz = _quat.w * _quat.z;
-
+    T qxx = _quat.x * _quat.x;
+    T qyy = _quat.y * _quat.y;
+    T qzz = _quat.z * _quat.z;
+    T qxz = _quat.x * _quat.z;
+    T qxy = _quat.x * _quat.y;
+    T qyz = _quat.y * _quat.z;
+    T qwx = _quat.w * _quat.x;
+    T qwy = _quat.w * _quat.y;
+    T qwz = _quat.w * _quat.z;
     data[m11] = 1.0 - 2.0 * (qyy + qzz);
     data[m12] = 2.0 * (qxy + qwz);
     data[m13] = 2.0 * (qxz - qwy);
-
     data[m21] = 2.0 * (qxy - qwz);
     data[m22] = 1.0 - 2.0 * (qxx + qzz);
     data[m23] = 2.0 * (qyz + qwx);
-
     data[m31] = 2.0 * (qxz + qwy);
     data[m32] = 2.0 * (qyz - qwx);
     data[m33] = 1.0 - 2.0 * (qxx + qyy);
@@ -321,9 +318,9 @@ public:
   }
 
   void rotate(const Vec3<T>& _rotation) {
-    if (_rotation.x != 0.f) rotate(_rotation.x, Vec3<T>(1.0, 0.0, 0.0));
-    if (_rotation.y != 0.f) rotate(_rotation.y, Vec3<T>(0.0, 1.0, 0.0));
-    if (_rotation.z != 0.f) rotate(_rotation.z, Vec3<T>(0.0, 0.0, 1.0));
+    if (_rotation.x != 0.0) rotate(_rotation.x, Vec3<T>(1.0, 0.0, 0.0));
+    if (_rotation.y != 0.0) rotate(_rotation.y, Vec3<T>(0.0, 1.0, 0.0));
+    if (_rotation.z != 0.0) rotate(_rotation.z, Vec3<T>(0.0, 0.0, 1.0));
   }
 
   void scale(const Vec3<T>& _v) {
@@ -565,6 +562,10 @@ public:
 
   float data[16];
 };
+
+typedef Mat4<double> Mat4d;
+typedef Mat4<float> Mat4f;
+typedef Mat4<int> Mat4i;
 
 } // namespace math
 

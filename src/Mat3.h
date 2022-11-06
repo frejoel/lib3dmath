@@ -1,7 +1,7 @@
 #ifndef MAT3_H_
 #define MAT3_H_
 
-#include "vectors.h"
+#include "vertex.h"
 #include <string.h>
 
 namespace math {
@@ -37,7 +37,7 @@ public:
 
   Mat3<T>(const Vec3<T>& _axis, const radians_t _angle) {
     Vec3<T> normalizedAxis = _axis;
-    if (normalizedAxis.normalize(1.f) == 0.f) {
+    if (normalizedAxis.normalize(1.0) == 0.0) {
       setIdentity();
     }
     else {
@@ -46,7 +46,7 @@ public:
       T nsi[3], ico;
       T n00, n01, n11, n02, n12, n22;
 
-      ico = (1.f - angleCos);
+      ico = (1.0 - angleCos);
       nsi[0] = normalizedAxis.x * angleSin;
       nsi[1] = normalizedAxis.y * angleSin;
       nsi[2] = normalizedAxis.z * angleSin;
@@ -255,9 +255,9 @@ public:
       eul2.z = atan2(-data[m12], -data[m11]);
     }
     else {
-      eul1.x = atan2f(-data[m32], data[m22]);
-      eul1.y = atan2f(-data[m13], cy);
-      eul1.z = 0.0f;
+      eul1.x = atan2(-data[m32], data[m22]);
+      eul1.y = atan2(-data[m13], cy);
+      eul1.z = 0.0;
       eul2 = eul1;
     }
     // return best, which is just the one with lowest values in it
@@ -288,6 +288,10 @@ public:
   T data[9];
 };
 
-} // namespace joge
+typedef Mat3<double> Mat3d;
+typedef Mat3<float> Mat3f;
+typedef Mat3<int> Mat3i;
+
+} // namespace math
 
 #endif // MAT3_H_
